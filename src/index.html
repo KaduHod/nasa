@@ -1,99 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nasa</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,200&display=swap" rel="stylesheet">
-    <style>
-        *{
-            font-family:'Poppins', sans-serif;
-        }
-    </style>
-</head>
-<body>
-    <div class="
-        lg:w-screen h-screen bg-red-700
-        md:w-screen
-        sm:w-screen sm:flex sm:flex-col 
-    ">
-        <div class="w-screen p-3 mb-2">
-            <ul class="
-                flex flex-col w-full justify-around
-                sm:flex-row 
-            ">
-                <li class="
-                    flex items-center text-lg font-bold justify-center
-                    text-white p-1 border border-red-700 
-                    sm:hover:border-b-white cursor-pointer;
-                ">Earth</li>
-                <li class="menu-item">Apod</li>
-                <li class="menu-item">Asteroid news</li>
-                <li class="menu-item">Asteroid</li>
-                <li class="menu-item">Exoplanet</li>
-            </ul>
-        </div>
-        <div class="w-full flex justify-start p-3 items-center" name="formWrapper">
-            <div class="p-10 bg-white rounded-xl shadow-2xl">
-                <h1 class="text-2xl font-semibold text-center m-1" > Earth </h1>
-                <form class="flex flex-col items-center"  name="earth" action="#">
-                    <label class="label" for="lat">Latitude</label>
-                    <input class="outline-none p-2 border-b  mb-3 border-gray-500" type="text" name="lat" value="-25.461368">
-                    <label class="label" for="lon">Longitude</label>
-                    <input class="input" type="text" name="lon" value="-49.233848" >
-                    <label class="label" for="dim">Dimensão da imagem</label>
-                    <input class="input" type="text" name="dim" value="0.3" >
-                    <label class="label" for="date">Data</label>
-                    <input class="input" type="date" name="date" value="2022-01-01">
-                    <button class="
-                        mt-3 bg-red-700 p-5 rounded-xl text-white
-                        hover:bg-black  hover:shadow-2xl
-                    " id="pedir-dados">Pedir foto da terra</button>
-                </form>
-            </div>
+import { NasaService } from "./Service/Nasa.service.js";
+import { dateFormatted } from './utils/functions.helpers.js';
+import { formulario } from "./utils/formulario.js";
+import { HamburguerMenu } from "./utils/menu.js";
+
+const init = (async () => {
+    const containerResult = document.getElementById('resultado');
+    const imageResult = document.getElementById('image-result');
+    const imageContainer = document.getElementById('')
+
+
+    let nasa = NasaService();
+
+    const earthForm = formulario({htmlElement:document.forms.earth});   
+    earthForm
+        .getButtonsBy('id','pedir-dados')
+        .addEventListener('click',async (e) => {
+            const payload = earthForm.getValues();
+            const data = await nasa.earth(payload)
+            console.log({data})
+            displayReponse(JSON.stringify(data, undefined, 1))
+            displayImage(data.url)
+    })
+
+    const spaceForm = formulario({htmlElement:document.forms.apod})
+    spaceForm
+        .getButtonsBy('id','pedir-dados')
+        .addEventListener('click',  async (e) => {
+            const payload = earthForm.getValues();
+            const data = await nasa.apod(payload)
+            console.log({data})
+            displayReponse(JSON.stringify(data, undefined, 1))
+            displayImage(data.url)
+        })
+
+    const asteroidForm = formulario({htmlElement:document.forms.asteroidNeoWs})
+    asteroidForm
+        .getButtonsBy('id','pedir-dados')
+        .addEventListener('click',async e=>{
+            const payload = earthForm.getValues();
+            const data = await nasa.asteroidNeoWs(payload)
+            console.log({data})
+            displayReponse(JSON.stringify(data, undefined, 1))
+            displayImage(data.url)
+        })
+
+    const asteroid = formulario({htmlElement:document.forms.asteroidById})
+    asteroid
+        .getButtonsBy('id','pedir-dados')
+        .addEventListener('click',async e=>{
+            const payload = asteroid.getValues();
+            const data = await nasa.asteroid(payload)
+            console.log({data})
+            displayReponse(JSON.stringify(data, undefined, 1))
+            displayImage(data.url)
+        })
+
+    const epic = formulario({htmlElement:document.forms.epic});
+        epic 
+            .getButtonsBy('id','pedir-dados')
+            .addEventListener('click', async e => {
+                const payload = epic.getValues();
+                const data = await nasa.epic(payload)
+                console.log({data})
+                displayReponse(JSON.stringify(data, undefined, 1))
+                displayImages(data.images)
+            })
+
+
+
             
-        </div>
+    function displayReponse(msg){
+        containerResult.innerHTML = `<pre>${msg}<pre>`
+    }
+    function displayImage(src){
+        imageResult.src = src
+    }
+
+    function displayImages(images){
+        images.forEach( src => {
+            let imageTag = document.createElement('img');
+            imageTag.src = src
+            imageC
+            console.log({src})
+        } )
         
-        <form name='apod' action="#">
-            <input type="date" name="date" value="2022-01-01">
-            <input type="text" name="count" value="1">
-            <button id="pedir-dados">Pedir foto do espaço</button>
-        </form>
-        <form name='asteroidNeoWs' action="#">
-            <input type="date" name="date" value="2022-01-01">
-            <input type="date" name="date" value="2022-01-20">
-            <button id="pedir-dados">Pedir foto de asteroides</button>
-        </form>
-        <form name='asteroidById' action="#">
-            <input type="text" name="asteroid_id" value="3167348">
-            <button id="pedir-dados">Pedir foto de asteroide</button>
-        </form>
-    
-        <!-- <form action="" action="#" name="epic"> -->
-            <!-- <input type="date" name="date" value="2015-10-31"> -->
-            <!-- <select name="collection" id=""> -->
-                <!-- <option value="enhanced">Enhanced</option> -->
-                <!-- <option value="natural">Natural</option> -->
-            <!-- </select> -->
-            <!-- <button id="pedir-dados">Pedir imagens polycromaticas</button> -->
-        <!-- </form> -->
-    
-        <form action="#" name="exoplanet">
-            
-        </form>
-        <div id="resultado">
-        </div>
-        <div id="images">
-            <img id='image-result' src="" alt="">
-        </div>
-        
-      
-    </div>
-    
-    <script type="module" src="./app.js"></script>
-</body>
-</html>
+    }
+
+
+
+    const hamburguer = HamburguerMenu({
+        htmlElement: document.getElementById('hamburguer-menu'),
+        targetContainer: document.getElementById('drop-down-menu')
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+})();
