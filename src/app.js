@@ -1,11 +1,14 @@
 import { NasaService } from "./Service/Nasa.service.js";
 import { dateFormatted } from './utils/functions.helpers.js';
 import { formulario } from "./utils/formulario.js";
+import { HamburguerMenu } from "./utils/menu.js";
 
 const init = (async () => {
     const containerResult = document.getElementById('resultado');
     const imageResult = document.getElementById('image-result');
     const imageContainer = document.getElementById('')
+
+
     let nasa = NasaService();
 
     const earthForm = formulario({htmlElement:document.forms.earth});   
@@ -85,7 +88,10 @@ const init = (async () => {
 
 
 
-
+    const hamburguer = HamburguerMenu({
+        htmlElement: document.getElementById('hamburguer-menu'),
+        targetContainer: document.getElementById('drop-down-menu')
+    })
 
 
 
