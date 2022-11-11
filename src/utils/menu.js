@@ -1,9 +1,10 @@
 let HamburguerMenu = class HamburguerMenu
 {
-    constructor({htmlElement, targetContainer}){
+    constructor({htmlElement, targetContainer, closeContainer}){
         this.hamburguer = htmlElement
         this.targetContainer = targetContainer
-        this.isHidden = this.getState();
+        this.isHidden = true;
+        this.closeContainer = closeContainer
         this.setEvents();
     }
 
@@ -13,37 +14,45 @@ let HamburguerMenu = class HamburguerMenu
     setEvents()
     {
         this.hamburguer.addEventListener('click', this.handler)
+        this.closeContainer.addEventListener('click', this.handler)
     }
 
     handler = (e) =>
     {
-        if(this.hamburguer.dataset.isHidden) this.showMenu()
+        if(this.isHidden) this.showMenu()
         else this.hideMenu()
-        console.log(this.isHidden)
     }
 
     showMenu()
     {
-        this.hamburguer.dataset.isHidden = '0'
-        console.log('show', this)
+        this.isHidden = false
+        this.targetContainer.classList.remove('-translate-y-full') 
     }
 
     hideMenu()
     {
-        this.hamburguer.dataset.isHidden = '1'
-        console.log('hide', this.hamburguer.dataset.isHidden)
+        this.isHidden = true
+        this.targetContainer.classList.add('-translate-y-full') 
     }
 
     getState()
     {
-        console.log(this.hamburguer.dataset.isHidden)
         return !!this.hamburguer.dataset.isHidden
     }
 }
 
 const hamburguerMenuDecorator = (HamburguerMenuClass) => {
     return (...params) => {
-        return new HamburguerMenuClass(...params)
+        let instance = new HamburguerMenuClass(...params);
+        return new Proxy(instance, {
+            get(target, prop){
+                if(prop == 'isHidden') return target.getState();
+                return target[prop]
+            },
+            set(target, prop){
+                return target[prop]
+            }
+        });
     }
 } 
 

@@ -90,8 +90,11 @@ const init = (async () => {
 
     const hamburguer = HamburguerMenu({
         htmlElement: document.getElementById('hamburguer-menu'),
-        targetContainer: document.getElementById('drop-down-menu')
+        targetContainer: document.getElementById('drop-down-menu'),
+        closeContainer: document.getElementById('close-menu')
     })
+
+    console.log(hamburguer.isHidden)
 
 
 
