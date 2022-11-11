@@ -1,6 +1,6 @@
 import { NasaService } from "./Service/Nasa.service.js";
 import { dateFormatted } from './utils/functions.helpers.js';
-import { Formulario } from "./utils/formulario.js";
+import { formulario } from "./utils/formulario.js";
 
 const init = (async () => {
     const containerResult = document.getElementById('resultado');
@@ -8,7 +8,7 @@ const init = (async () => {
     const imageContainer = document.getElementById('')
     let nasa = NasaService();
 
-    const earthForm = new Formulario({htmlElement:document.forms.earth});   
+    const earthForm = formulario({htmlElement:document.forms.earth});   
     earthForm
         .getButtonsBy('id','pedir-dados')
         .addEventListener('click',async (e) => {
@@ -19,7 +19,7 @@ const init = (async () => {
             displayImage(data.url)
     })
 
-    const spaceForm = new Formulario({htmlElement:document.forms.apod})
+    const spaceForm = formulario({htmlElement:document.forms.apod})
     spaceForm
         .getButtonsBy('id','pedir-dados')
         .addEventListener('click',  async (e) => {
@@ -30,7 +30,7 @@ const init = (async () => {
             displayImage(data.url)
         })
 
-    const asteroidForm = new Formulario({htmlElement:document.forms.asteroidNeoWs})
+    const asteroidForm = formulario({htmlElement:document.forms.asteroidNeoWs})
     asteroidForm
         .getButtonsBy('id','pedir-dados')
         .addEventListener('click',async e=>{
@@ -41,7 +41,7 @@ const init = (async () => {
             displayImage(data.url)
         })
 
-    const asteroid = new Formulario({htmlElement:document.forms.asteroidById})
+    const asteroid = formulario({htmlElement:document.forms.asteroidById})
     asteroid
         .getButtonsBy('id','pedir-dados')
         .addEventListener('click',async e=>{
@@ -52,7 +52,7 @@ const init = (async () => {
             displayImage(data.url)
         })
 
-    const epic = new Formulario({htmlElement:document.forms.epic});
+    const epic = formulario({htmlElement:document.forms.epic});
         epic 
             .getButtonsBy('id','pedir-dados')
             .addEventListener('click', async e => {

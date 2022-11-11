@@ -1,7 +1,7 @@
 /**
  * Classe formulario para facilitar codigos com formularios
  */
-export class Formulario
+let formulario = class Formulario
 {
     constructor({htmlElement})
     {
@@ -52,4 +52,19 @@ export class Formulario
     {
         return this.getButtons().find(button => button[key] === value);
     }
+}
+
+const formularioDecorator = (formulario) => {
+    /**
+     * Logica
+     */
+    return (...params) => {
+        return new formulario(...params)
+    }
+}
+
+formulario = formularioDecorator(formulario);
+
+export {
+    formulario
 }

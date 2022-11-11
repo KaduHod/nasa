@@ -1,0 +1,22 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000n\u0000a\u0000s\u0000a\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaduHod/nasa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaduHod/nasa/issues"
+  },
+  "homepage": "https://github.com/KaduHod/nasa#readme",
+  "dependencies": {
+    "tailwindcss": "^3.2.3"
+  }
+}
