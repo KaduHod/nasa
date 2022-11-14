@@ -8,7 +8,6 @@ const init = (async () => {
     const imageResult = document.getElementById('image-result');
     const imageContainer = document.getElementById('')
 
-
     let nasa = NasaService();
 
     const earthForm = formulario({htmlElement:document.forms.earth});   
@@ -77,39 +76,22 @@ const init = (async () => {
     }
 
     function displayImages(images){
+        imageContainer.innerHTML = ''
         images.forEach( src => {
             let imageTag = document.createElement('img');
             imageTag.src = src
-            imageC
-            console.log({src})
-        } )
-        
+            imageContainer.appendChild(imageTag)
+        })
     }
 
+    const hamburguerOptions = {
+        hamburguerElement: document.getElementById('hamburguer-menu'),
+        contentElement: document.getElementById('hambuguer-content'),
+        icon: document.getElementById('hamburguer-icon'),
+        openIcon: document.getElementById('hamburguer-open'),
+        closeIcon: document.getElementById('hamburguer-close')
+    }
+    const hamburguerMenuInstance = new HamburguerMenu(hamburguerOptions)
 
-
-    const hamburguer = HamburguerMenu({
-        htmlElement: document.getElementById('hamburguer-menu'),
-        targetContainer: document.getElementById('drop-down-menu'),
-        closeContainer: document.getElementById('close-menu')
-    })
-
-    console.log(hamburguer.isHidden)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    console.log(hamburguerMenuInstance)
 })();

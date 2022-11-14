@@ -18,41 +18,42 @@
 <body>
     <div class="
         lg:w-screen h-screen bg-red-700
-        
         md:w-screen
         sm:w-screen sm:flex sm:flex-col sm:bg-red-700
     ">
-        <div class="
-            w-screen p-3 mb-2 
-            block absolute 
-            sm:translate-y-0 sm:block sm:relative
-           bg-red-700
-            -translate-y-full
-        "
-        id="drop-down-menu"
-        >
-            
-            <ul class="flex flex-col w-full justify-around sm:flex-row ">
-                <li class="menu-item">Earth</li>
-                <li class="menu-item">Apod</li>
-                <li class="menu-item">Asteroid news</li>
-                <li class="menu-item">Asteroid</li>
-                <li class="menu-item">Exoplanet</li>
-            </ul>
-            <div id="close-menu" class="text-white sm:hidden">
-                close
+    <nav class="menu-container" id="hamburguer-menu">
+        <div class="menu-hamburguer-wrapper" >
+            <div class="menu-hamburguer-container group" id="hamburguer-icon">
+                <ion-icon
+                    class="scale-150 group-hover:text-white hidden" 
+                    name="reorder-three-outline" 
+                    id="hamburguer-open">
+                </ion-icon>
+                <ion-icon 
+                    class="scale-150 group-hover:text-white" 
+                    name="close-outline" 
+                    id="hamburguer-close">
+                </ion-icon>
             </div>
         </div>
-        <div id="hamburguer-menu" class="w-full h-14
-                flex flex-col items-center justify-around pt-3
-                sm:hidden
-            "
-            data-is-hidden="0"
-            >
-                <div class="border-b-2 w-12 h-1 bg-white"></div>
-                <div class="border-b-2 w-12 h-1 bg-white"></div>
-                <div class="border-b-2 w-12 h-1 bg-white"></div>
-        </div>
+        <ul class="nav-bar" id="hambuguer-content">
+            <li class="nav-bar-item">
+                <a href="#">Earth</a>
+            </li>
+            <li class="nav-bar-item">
+                <a href="#">Asteroid</a>
+            </li>
+            <li class="nav-bar-item">
+                <a href="#">Asterioid by id</a>
+            </li>
+            <li class="nav-bar-item">
+                <a href="#">Epic</a>
+            </li>
+            <li class="nav-bar-item">
+                <a href="#">Apod</a>
+            </li>
+        </ul>
+    </nav>
         <div class="w-full flex justify-start p-3 items-center" name="formWrapper">
             <div class="p-10 bg-white rounded-xl shadow-2xl">
                 <h1 class="text-2xl font-semibold text-center m-1" > Earth </h1>
@@ -105,5 +106,7 @@
         </div>
     </div>
     <script type="module" src="./app.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
